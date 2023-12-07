@@ -227,3 +227,32 @@ HAVING COUNT(ProductID) >= 5;
 SELECT ProductID, ProductName, UnitsInStock * UnitPrice AS InventoryValue
 FROM Products
 
+PART 3 -- NESTING QUERIES
+-- Question 1
+SELECT ProductName, UnitPrice
+FROM Products
+WHERE UnitPrice = (SELECT MAX(UnitPrice) FROM Products);
+
+-- Question 3
+SELECT OrderID, ProductID
+FROM `Order Details`
+WHERE ProductID = (SELECT ProductID FROM Products 
+   WHERE ProductName LIKE '%Sasquatch Ale%');
+-- Question 4
+SELECT
+    Employees.FirstName,
+    Employees.LastName
+FROM
+    Employees
+JOIN
+    Orders ON Employees.EmployeeID = Orders.EmployeeID
+WHERE
+    Orders.OrderID = 10266;
+    answer: yanet levering
+    
+-- Question 5
+
+SELECT customers.ContactName
+FROM customers
+JOIN orders ON customers.CustomerID = orders.CustomerID
+WHERE orders.OrderID = 10266;
